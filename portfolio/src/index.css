@@ -17,7 +17,7 @@ body {
   background-color: var(--background-color);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding-top: var(--navbar-height); /* Add padding for fixed navbar */
+  padding-top: var(--navbar-height); /* Keep padding for fixed navbar */
 }
 
 /* Add other global styles here */
@@ -47,78 +47,71 @@ html, body {
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--navbar-height); /* Adjust scroll position for fixed navbar */
+  /* scroll-padding-top might not be strictly needed with the JS calculation, 
+     but keep it for robustness, especially with hash links */
+  scroll-padding-top: var(--navbar-height); 
 }
 
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Montserrat', sans-serif;
-  color: #fff;
-  background-color: #1e1e1e;
-}
-
+/* This general section rule might replace specific page component styling */
+/* Consider moving common section styles here if applicable */
+/*
 section {
-  min-height: 100vh;
-  padding: 80px 0;
+  min-height: 100vh; 
+  padding: 80px 0; 
   box-sizing: border-box;
 }
+*/
 
-/* Add a smooth transition between sections */
-section:not(:first-child) {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Ensure content doesn't go under the navbar */
-.section {
-  min-height: 100vh;
-  padding-top: var(--navbar-height) !important;
+/* Styling for the divs acting as sections - adjust padding as needed */
+#home, #education, #projects, #skills, #contact {
+  min-height: 100vh; /* Ensure sections take full viewport height */
+  padding: 2rem; /* Add some padding inside sections */
   box-sizing: border-box;
+  /* You might want specific background colors or other styles per section */
+  /* Example: */
+  /* &#home { background-color: var(--background-color); } */
+  /* &#education { background-color: var(--section-bg); } */
 }
 
-/* Navigation dots styling */
+/* Remove fullpage navigation dots styling */
+/* 
 #fp-nav ul li a span {
   background: #ff6f61;
 }
-
 #fp-nav ul li .fp-tooltip {
   color: #ff6f61;
 }
+*/
 
-/* Ensure navbar stays on top */
+/* Ensure navbar stays on top (keep this) */
 .MuiAppBar-root {
   z-index: 9999 !important;
 }
 
-/* Ensure content doesn't overlap with navbar */
+/* Remove fullpage specific rules */
+/*
 .fp-watermark {
   display: none !important;
 }
-
-/* Custom scrollbar for cards */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-}
-
-::-webkit-scrollbar-thumb {
-  background: #ff6f61;
-  border-radius: 4px;
-}
-
-/* Ensure proper spacing for fullpage sections */
 .fp-section {
   padding-top: var(--navbar-height) !important;
 }
-
 .fp-tableCell {
   padding-top: var(--navbar-height) !important;
 }
-
-/* Make sure fullpage slides don't block interaction with fixed elements */
 .fp-overflow {
   overflow: visible !important;
+}
+*/
+
+/* Custom scrollbar (keep this if desired) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+::-webkit-scrollbar-thumb {
+  background: #ff6f61;
+  border-radius: 4px;
 }

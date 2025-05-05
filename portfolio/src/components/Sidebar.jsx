@@ -1,19 +1,19 @@
 import { Drawer, List, ListItem, ListItemText, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
-const Sidebar = ({ isOpen, toggleSidebar, navigateTo }) => {
-  const handleNavigation = (index) => {
-    console.log('Sidebar: Clicked to navigate to section', index);
-    navigateTo(index);
+const Sidebar = ({ isOpen, toggleSidebar, scrollToSection }) => {
+  const handleNavigation = (sectionId) => {
+    console.log('Sidebar: Scrolling to section', sectionId);
+    scrollToSection(sectionId);
     toggleSidebar(); // Close sidebar after navigation
   };
 
   const menuItems = [
-    { label: 'Home', index: 1 },
-    { label: 'Education', index: 2 },
-    { label: 'Projects', index: 3 },
-    { label: 'Skills', index: 4 },
-    { label: 'Contact', index: 5 }
+    { label: 'Home', sectionId: 'home' },
+    { label: 'Education', sectionId: 'education' },
+    { label: 'Projects', sectionId: 'projects' },
+    { label: 'Skills', sectionId: 'skills' },
+    { label: 'Contact', sectionId: 'contact' }
   ];
 
   return (
@@ -40,7 +40,7 @@ const Sidebar = ({ isOpen, toggleSidebar, navigateTo }) => {
           <ListItem 
             button 
             key={item.label}
-            onClick={() => handleNavigation(item.index)}
+            onClick={() => handleNavigation(item.sectionId)}
             sx={{
               '&:hover': {
                 bgcolor: '#d1423d',

@@ -1,18 +1,18 @@
 import { AppBar, Toolbar, Typography, Button, Box, Container, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 
-const Navbar = ({ toggleSidebar, navigateTo }) => {
+const Navbar = ({ toggleSidebar, scrollToSection }) => {
   const navItems = [
-    { label: 'Home', index: 1 },
-    { label: 'Education', index: 2 },
-    { label: 'Projects', index: 3 },
-    { label: 'Skills', index: 4 },
-    { label: 'Contact', index: 5 }
+    { label: 'Home', sectionId: 'home' },
+    { label: 'Education', sectionId: 'education' },
+    { label: 'Projects', sectionId: 'projects' },
+    { label: 'Skills', sectionId: 'skills' },
+    { label: 'Contact', sectionId: 'contact' }
   ];
 
-  const handleNavigation = (index) => {
-    console.log('Navbar: Clicked to navigate to section', index);
-    navigateTo(index);
+  const handleNavigation = (sectionId) => {
+    console.log('Navbar: Scrolling to section', sectionId);
+    scrollToSection(sectionId);
   };
 
   return (
@@ -51,7 +51,7 @@ const Navbar = ({ toggleSidebar, navigateTo }) => {
               fontWeight: 'bold',
               cursor: 'pointer'
             }}
-            onClick={() => handleNavigation(1)}
+            onClick={() => handleNavigation('home')}
           >
             My Portfolio
           </Typography>
@@ -59,7 +59,7 @@ const Navbar = ({ toggleSidebar, navigateTo }) => {
             {navItems.map((item) => (
               <Button
                 key={item.label}
-                onClick={() => handleNavigation(item.index)}
+                onClick={() => handleNavigation(item.sectionId)}
                 sx={{
                   color: 'white',
                   mx: 1,

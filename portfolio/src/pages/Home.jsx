@@ -1,9 +1,10 @@
 import { Container, Box, Typography, Button } from '@mui/material';
-import { useContext } from 'react';
-import { FullpageContext } from '../App';
 
-const Home = () => {
-  const fullpageApi = useContext(FullpageContext);
+const Home = ({ scrollToSection }) => {
+  const handleSeeProjectsClick = () => {
+    console.log('Home: Scrolling to projects');
+    scrollToSection('projects');
+  };
 
   return (
     <Box
@@ -48,7 +49,7 @@ const Home = () => {
           Creative Developer | Designer | Writer
         </Typography>
         <Button
-          onClick={() => fullpageApi?.moveTo(3)}
+          onClick={handleSeeProjectsClick}
           variant="contained"
           sx={{
             mt: 3,
