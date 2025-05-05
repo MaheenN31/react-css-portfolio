@@ -54,20 +54,22 @@ The website is fully responsive and adapts to different screen sizes:
 ## Screenshots
 
 ### Home Page
-![Logo](ss/homepage.png)
+![Logo](ss/homepage.PNG)
 
 ### Education Page
-![Logo](ss/education.png)
+![Logo](ss/education.PNG)
 
 ### Projects Page
-![Logo](ss/projects1.png)
+![Logo](ss/projects1.PNG)
 
-![Logo](ss/projects2.png)
+![Logo](ss/projects2.PNG)
 
 ### Skills Page
-![Logo](ss/skills.png)
+![Logo](ss/skills.PNG)
 
 ### Contact Page
-![Logo](ss/contact.png)
+![Logo](ss/contact.PNG)
+
+
 
 
