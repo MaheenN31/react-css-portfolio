@@ -1,11 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600&display=swap');
+
 :root {
-  --primary-color: #197642;
+  --primary-color: #ff6f61;
+  --secondary-color: #d1423d;
+  --background-color: #1e1e1e;
+  --section-bg: #2a2a2a;
   --mobile-breakpoint: 768px;
+  --navbar-height: 64px;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  margin: 0;
+  padding: 0;
+  background-color: var(--background-color);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding-top: var(--navbar-height); /* Add padding for fixed navbar */
+}
+
+/* Add other global styles here */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--navbar-height); /* Adjust scroll position for fixed navbar */
 }
 
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  color: #fff;
+  background-color: #1e1e1e;
 }
 
-/* Add other global styles here */
+section {
+  min-height: 100vh;
+  padding: 80px 0;
+  box-sizing: border-box;
+}
+
+/* Add a smooth transition between sections */
+section:not(:first-child) {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Ensure content doesn't go under the navbar */
+.section {
+  min-height: 100vh;
+  padding-top: var(--navbar-height) !important;
+  box-sizing: border-box;
+}
+
+/* Navigation dots styling */
+#fp-nav ul li a span {
+  background: #ff6f61;
+}
+
+#fp-nav ul li .fp-tooltip {
+  color: #ff6f61;
+}
+
+/* Ensure navbar stays on top */
+.MuiAppBar-root {
+  z-index: 9999 !important;
+}
+
+/* Ensure content doesn't overlap with navbar */
+.fp-watermark {
+  display: none !important;
+}
+
+/* Custom scrollbar for cards */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff6f61;
+  border-radius: 4px;
+}
+
+/* Ensure proper spacing for fullpage sections */
+.fp-section {
+  padding-top: var(--navbar-height) !important;
+}
+
+.fp-tableCell {
+  padding-top: var(--navbar-height) !important;
+}
+
+/* Make sure fullpage slides don't block interaction with fixed elements */
+.fp-overflow {
+  overflow: visible !important;
+}
