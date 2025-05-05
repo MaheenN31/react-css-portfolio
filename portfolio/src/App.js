@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Box } from '@mui/material';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
@@ -9,13 +8,10 @@ import Skills from './pages/Skills';
 import Contact from './pages/Contact';
 import Footer from './components/Footer';
 
+// Fixed sidebar width to use in calculations
+const SIDEBAR_WIDTH = 250;
+
 function App() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
   // Function for smooth scrolling
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
@@ -34,36 +30,56 @@ function App() {
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-      <Navbar
-        toggleSidebar={toggleSidebar}
-        scrollToSection={scrollToSection}
-      />
-      <Sidebar
-        isOpen={isSidebarOpen}
-        toggleSidebar={toggleSidebar}
-        scrollToSection={scrollToSection}
+    <Box sx={{ display: 'flex' }}>
+      {/* Fixed Sidebar */}
+      <Sidebar 
+        scrollToSection={scrollToSection} 
       />
       
-      <Box component="main" sx={{ flexGrow: 1 }}>
-        <div id="home">
-          <Home scrollToSection={scrollToSection} />
-        </div>
-        <div id="education">
-          <Education />
-        </div>
-        <div id="projects">
-          <Projects />
-        </div>
-        <div id="skills">
-          <Skills />
-        </div>
-        <div id="contact">
-          <Contact />
-        </div>
-      </Box>
+      {/* Main content area */}
+      <Box 
+        sx={{ 
+          flexGrow: 1, 
+          ml: `${SIDEBAR_WIDTH}px`,  // Push content right to make room for sidebar
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: '100vh',
+        }}
+      >
+        {/* Navbar still at the top */}
+        <Navbar
+          scrollToSection={scrollToSection}
+        />
+        
+        {/* Main content sections */}
+        <Box 
+          component="main" 
+          sx={{ 
+            flexGrow: 1,
+            display: 'flex',
+            flexDirection: 'column',
+          }}
+        >
+          <div id="home">
+            <Home scrollToSection={scrollToSection} />
+          </div>
+          <div id="education">
+            <Education />
+          </div>
+          <div id="projects">
+            <Projects />
+          </div>
+          <div id="skills">
+            <Skills />
+          </div>
+          <div id="contact">
+            <Contact />
+          </div>
+        </Box>
 
-      <Footer />
+        {/* Footer at the bottom */}
+        <Footer />
+      </Box>
     </Box>
   );
 }

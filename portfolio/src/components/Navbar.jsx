@@ -1,15 +1,6 @@
-import { AppBar, Toolbar, Typography, Button, Box, Container, IconButton } from '@mui/material';
-import MenuIcon from '@mui/icons-material/Menu';
+import { AppBar, Toolbar, Typography, Box } from '@mui/material';
 
-const Navbar = ({ toggleSidebar, scrollToSection }) => {
-  const navItems = [
-    { label: 'Home', sectionId: 'home' },
-    { label: 'Education', sectionId: 'education' },
-    { label: 'Projects', sectionId: 'projects' },
-    { label: 'Skills', sectionId: 'skills' },
-    { label: 'Contact', sectionId: 'contact' }
-  ];
-
+const Navbar = ({ scrollToSection }) => {
   const handleNavigation = (sectionId) => {
     console.log('Navbar: Scrolling to section', sectionId);
     scrollToSection(sectionId);
@@ -20,61 +11,34 @@ const Navbar = ({ toggleSidebar, scrollToSection }) => {
       id="main-navbar"
       position="fixed" 
       sx={{ 
-        bgcolor: 'rgba(0, 0, 0, 0.9)',
-        backdropFilter: 'blur(8px)',
-        WebkitBackdropFilter: 'blur(8px)',
-        zIndex: 9999,
+        bgcolor: 'rgba(18, 18, 18, 0.7)', // More translucent background
+        backdropFilter: 'blur(15px)', // Enhanced blur effect
+        WebkitBackdropFilter: 'blur(15px)',
+        zIndex: 1100,
         top: 0,
-        left: 0,
+        left: '250px', // Start from sidebar edge
         right: 0,
-        boxShadow: '0 2px 10px rgba(0,0,0,0.3)',
+        width: 'calc(100% - 250px)', // Full width minus sidebar
+        boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
       }}
     >
-      <Container>
-        <Toolbar disableGutters>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={toggleSidebar}
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography 
-            variant="h6" 
-            component="div" 
-            sx={{ 
-              flexGrow: 1, 
-              color: '#ff6f61',
-              fontSize: '1.5rem',
-              fontWeight: 'bold',
-              cursor: 'pointer'
-            }}
-            onClick={() => handleNavigation('home')}
-          >
-            My Portfolio
-          </Typography>
-          <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            {navItems.map((item) => (
-              <Button
-                key={item.label}
-                onClick={() => handleNavigation(item.sectionId)}
-                sx={{
-                  color: 'white',
-                  mx: 1,
-                  '&:hover': { 
-                    color: '#ff6f61',
-                    backgroundColor: 'rgba(255, 111, 97, 0.1)'
-                  }
-                }}
-              >
-                {item.label}
-              </Button>
-            ))}
-          </Box>
-        </Toolbar>
-      </Container>
+      <Toolbar sx={{ width: '100%', px: 3 }}> {/* Full width toolbar with padding */}
+        <Typography 
+          variant="h6" 
+          component="div" 
+          sx={{ 
+            flexGrow: 1, 
+            color: '#ff6f61',
+            fontSize: '1.5rem',
+            fontWeight: 'bold',
+            cursor: 'pointer',
+            textAlign: 'center' // Center the title since we removed the buttons
+          }}
+          onClick={() => handleNavigation('home')}
+        >
+          My Portfolio
+        </Typography>
+      </Toolbar>
     </AppBar>
   );
 };
