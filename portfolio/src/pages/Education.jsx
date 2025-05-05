@@ -1,4 +1,4 @@
-import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Container, Typography, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, useTheme } from '@mui/material';
 
 const educationData = [
   { degree: "Bachelor's in Computer Science", institution: "ITU", year: "2027" },
@@ -7,6 +7,9 @@ const educationData = [
 ];
 
 const Education = () => {
+  const theme = useTheme();
+  const isDarkMode = theme.palette.mode === 'dark';
+  
   return (
     <Container sx={{ py: 5 }}>
       <Typography 
@@ -19,25 +22,43 @@ const Education = () => {
       <TableContainer 
         component={Paper} 
         sx={{ 
-          bgcolor: 'rgba(0, 0, 0, 0.8)',
+          bgcolor: isDarkMode ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.9)',
           maxWidth: '80%',
           margin: 'auto',
+          boxShadow: isDarkMode 
+            ? '0 4px 8px rgba(0, 0, 0, 0.5)' 
+            : '0 4px 8px rgba(0, 0, 0, 0.1)',
         }}
       >
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Degree</TableCell>
-              <TableCell>Institution</TableCell>
-              <TableCell>Year</TableCell>
+              <TableCell sx={{ 
+                color: isDarkMode ? '#e0e0e0' : '#666666',
+                fontWeight: 'bold'
+              }}>Degree</TableCell>
+              <TableCell sx={{ 
+                color: isDarkMode ? '#e0e0e0' : '#666666',
+                fontWeight: 'bold'
+              }}>Institution</TableCell>
+              <TableCell sx={{ 
+                color: isDarkMode ? '#e0e0e0' : '#666666',
+                fontWeight: 'bold'
+              }}>Year</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {educationData.map((row) => (
               <TableRow key={row.degree}>
-                <TableCell>{row.degree}</TableCell>
-                <TableCell>{row.institution}</TableCell>
-                <TableCell>{row.year}</TableCell>
+                <TableCell sx={{ color: isDarkMode ? '#e0e0e0' : '#666666' }}>
+                  {row.degree}
+                </TableCell>
+                <TableCell sx={{ color: isDarkMode ? '#e0e0e0' : '#666666' }}>
+                  {row.institution}
+                </TableCell>
+                <TableCell sx={{ color: isDarkMode ? '#e0e0e0' : '#666666' }}>
+                  {row.year}
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>

@@ -3,15 +3,16 @@
 :root {
   --primary-color: #ff6f61;
   --secondary-color: #d1423d;
-  --background-color: #1e1e1e;
+  --background-color: var(--mui-palette-background-default);
   --section-bg: #2a2a2a;
   --mobile-breakpoint: 768px;
   --navbar-height: 64px;
+  --text-color: var(--mui-palette-text-primary);
 }
 
 body {
   font-family: 'Montserrat', sans-serif;
-  color: #fff;
+  color: var(--text-color);
   margin: 0;
   padding: 0;
   background-color: var(--background-color);

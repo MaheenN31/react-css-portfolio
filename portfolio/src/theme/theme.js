@@ -1,80 +1,111 @@
 import { createTheme } from '@mui/material/styles';
 
-// Refined Dark Theme
-const theme = createTheme({
-  palette: {
-    mode: 'dark', // Keep dark mode
-    primary: {
-      main: '#ff6f61', // Keep coral as primary accent
-    },
-    secondary: {
-      main: '#f7a399', // A lighter coral/peach for secondary accents if needed
-    },
-    background: {
-      default: '#121212', // Deeper charcoal/near-black background
-      paper: '#1e1e1e',   // Slightly lighter background for cards/surfaces
-    },
-    text: {
-      primary: '#e0e0e0', // Light grey for primary text (good contrast)
-      secondary: '#b0b0b0', // Dimmer grey for secondary text
-    },
-  },
-  typography: {
-    fontFamily: '"Montserrat", "Helvetica", "Arial", sans-serif',
-    h1: {
-      fontWeight: 600,
-    },
-    h2: {
-      fontWeight: 600,
-    },
-    h3: {
-      fontWeight: 600,
-    },
-    // Ensure other typography settings are consistent
-  },
-  components: {
-    // Optional: Add default component styles for consistency
-    MuiAppBar: {
-      styleOverrides: {
-        root: {
-          backgroundColor: 'rgba(18, 18, 18, 0.8)', // Match background.default with transparency
-          backdropFilter: 'blur(10px)',
-          WebkitBackdropFilter: 'blur(10px)',
-          boxShadow: '0 2px 10px rgba(0,0,0,0.5)' // Slightly stronger shadow
-        },
+// Function to create theme based on mode
+export const createAppTheme = (mode) => {
+  return createTheme({
+    palette: {
+      mode,
+      primary: {
+        main: '#ff6f61', // Coral accent for both modes
+      },
+      secondary: {
+        main: '#f7a399', // Lighter coral/peach
+      },
+      background: {
+        // More grey backgrounds for light mode
+        default: mode === 'dark' ? '#121212' : '#e5e5e7', 
+        paper: mode === 'dark' ? '#1e1e1e' : '#ececee',
+      },
+      text: {
+        // Different text colors based on mode
+        primary: mode === 'dark' ? '#e0e0e0' : '#444444',
+        secondary: mode === 'dark' ? '#b0b0b0' : '#666666',
       },
     },
-    MuiCard: {
-      styleOverrides: {
-        root: {
-          backgroundColor: '#1e1e1e', // Explicitly set card background
-          border: '1px solid rgba(255, 255, 255, 0.1)', // Subtle border
-          borderRadius: '8px', // Slightly more rounded corners
-        }
-      }
+    typography: {
+      fontFamily: '"Montserrat", "Helvetica", "Arial", sans-serif',
+      h1: {
+        fontWeight: 600,
+      },
+      h2: {
+        fontWeight: 600,
+      },
+      h3: {
+        fontWeight: 600,
+      },
     },
-    MuiButton: {
-      styleOverrides: {
-        root: {
-          borderRadius: '8px', // Consistent rounded corners
-        },
-        containedPrimary: {
-          '&:hover': {
-            backgroundColor: '#d1423d', // Slightly darker coral on hover
+    components: {
+      MuiAppBar: {
+        styleOverrides: {
+          root: {
+            backgroundColor: mode === 'dark' 
+              ? 'rgba(18, 18, 18, 0.8)' 
+              : 'rgba(220, 220, 225, 0.9)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            boxShadow: mode === 'dark'
+              ? '0 2px 10px rgba(0,0,0,0.5)'
+              : '0 2px 10px rgba(0,0,0,0.1)',
+            color: mode === 'dark' ? '#ffffff' : '#333333',
           },
         },
       },
+      MuiCard: {
+        styleOverrides: {
+          root: {
+            backgroundColor: mode === 'dark' ? '#1e1e1e' : '#e8e8ea',
+            border: mode === 'dark' 
+              ? '1px solid rgba(255, 255, 255, 0.1)' 
+              : '1px solid rgba(0, 0, 0, 0.05)',
+            borderRadius: '8px',
+          }
+        }
+      },
+      MuiButton: {
+        styleOverrides: {
+          root: {
+            borderRadius: '8px',
+          },
+          containedPrimary: {
+            '&:hover': {
+              backgroundColor: '#d1423d',
+            },
+          },
+        },
+      },
+      MuiChip: {
+        styleOverrides: {
+          root: {
+            backgroundColor: mode === 'dark' 
+              ? 'rgba(255, 255, 255, 0.1)' 
+              : 'rgba(0, 0, 0, 0.08)',
+            color: mode === 'dark' ? '#e0e0e0' : '#555555',
+          }
+        }
+      },
+      MuiTableContainer: {
+        styleOverrides: {
+          root: {
+            backgroundColor: mode === 'dark' 
+              ? 'rgba(30, 30, 30, 0.9)' 
+              : 'rgba(215, 215, 220, 0.9)',
+          }
+        }
+      },
+      MuiTableCell: {
+        styleOverrides: {
+          root: {
+            color: mode === 'dark' ? '#e0e0e0' : '#555555',
+          },
+          head: {
+            fontWeight: 600,
+            color: mode === 'dark' ? '#ffffff' : '#444444',
+          }
+        }
+      }
     },
-     MuiChip: {
-       styleOverrides: {
-         root: {
-            // Example: Make chips use theme colors more effectively
-            // Adjust based on where chips are used
-         }
-       }
-     }
-    // Add other component overrides as needed
-  },
-});
+  });
+};
 
-export default theme;
+// Default export is the dark theme
+export default createAppTheme('dark');
