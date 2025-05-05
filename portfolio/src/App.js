@@ -7,6 +7,7 @@ import Education from './pages/Education';
 import Projects from './pages/Projects';
 import Skills from './pages/Skills';
 import Contact from './pages/Contact';
+import Footer from './components/Footer';
 
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -33,7 +34,7 @@ function App() {
   };
 
   return (
-    <Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar
         toggleSidebar={toggleSidebar}
         scrollToSection={scrollToSection}
@@ -44,21 +45,25 @@ function App() {
         scrollToSection={scrollToSection}
       />
       
-      <div id="home">
-        <Home scrollToSection={scrollToSection} />
-      </div>
-      <div id="education">
-        <Education />
-      </div>
-      <div id="projects">
-        <Projects />
-      </div>
-      <div id="skills">
-        <Skills />
-      </div>
-      <div id="contact">
-        <Contact />
-      </div>
+      <Box component="main" sx={{ flexGrow: 1 }}>
+        <div id="home">
+          <Home scrollToSection={scrollToSection} />
+        </div>
+        <div id="education">
+          <Education />
+        </div>
+        <div id="projects">
+          <Projects />
+        </div>
+        <div id="skills">
+          <Skills />
+        </div>
+        <div id="contact">
+          <Contact />
+        </div>
+      </Box>
+
+      <Footer />
     </Box>
   );
 }

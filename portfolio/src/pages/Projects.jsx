@@ -1,33 +1,36 @@
-import { Container, Grid, Typography, Card, CardContent, CardMedia, Box, CardActionArea, Chip, Stack } from '@mui/material';
+import { Container, Typography, Card, CardContent, CardMedia, Box, Chip, Stack } from '@mui/material';
 
 const projects = [
   {
     title: "Unity 2D Game",
     image: "/images/project1.jpg",
     category: "Game Development",
-    description: "For my final project in Game Development, I designed and developed a 2D game from scratch using Unity. This project involved creating engaging gameplay mechanics, designing immersive levels, and implementing smooth player controls.",
-    technologies: ["Unity", "C#", "2D Animation", "Game Design"]
+    description: "Developed a 2D Unity game with engaging mechanics, immersive levels, and smooth controls.",
+    technologies: ["Unity", "C#", "Game Design"],
+    // Optional: Add links
+    // liveUrl: '#',
+    // repoUrl: '#'
   },
   {
-    title: "Database Management",
+    title: "Database Management App",
     image: "/images/project2.png",
     category: "Web Development",
-    description: "I developed a web application for university data management, allowing efficient storage, retrieval, and organization of essential academic information. The system was designed to streamline university-related processes.",
+    description: "Web app for university data management: efficient storage, retrieval, and organization.",
     technologies: ["MySQL", "PHP", "HTML", "CSS", "JavaScript"]
   },
   {
-    title: "Paint Application",
+    title: "Java Paint Application",
     image: "/images/project3.png",
     category: "Desktop Application",
-    description: "For my Object-Oriented Programming (OOP) project, I developed a paint application that allows users to draw, erase, and customize their artwork using various tools and colors.",
-    technologies: ["Java", "JavaFX", "OOP", "UI Design"]
+    description: "Created a paint application using JavaFX, featuring drawing, erasing, and customization tools.",
+    technologies: ["Java", "JavaFX", "OOP"]
   },
   {
-    title: "Probability Project",
+    title: "Energy Consumption Viz",
     image: "/images/project4.jpg",
     category: "Data Visualization",
-    description: "For this project, I created a sunburst diagram to visualize global energy consumption in 2023, comparing renewable and non-renewable energy sources.",
-    technologies: ["D3.js", "JavaScript", "Data Analysis", "SVG"]
+    description: "Visualized global energy consumption using D3.js, comparing renewable/non-renewable sources.",
+    technologies: ["D3.js", "JavaScript", "SVG"]
   }
 ];
 
@@ -36,105 +39,131 @@ const Projects = () => {
     <Box
       sx={{
         minHeight: '100vh',
-        pt: 10,
-        pb: 5,
-        backgroundColor: 'background.default'
+        py: { xs: 6, md: 10 }, // Responsive padding top/bottom
+        px: 2, // Horizontal padding
+        backgroundColor: 'background.default', // Use theme background
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center'
       }}
     >
       <Container maxWidth="lg">
         <Typography 
           variant="h2" 
           textAlign="center" 
+          gutterBottom // Adds bottom margin
           sx={{ 
-            mb: 6,
-            color: '#ff6f61',
-            fontWeight: 'bold'
+            fontWeight: 'bold',
+            color: 'primary.main', // Use theme primary color
+            mb: { xs: 4, md: 6 } // Responsive margin bottom
           }}
         >
           My Works
         </Typography>
-        <Grid container spacing={4}>
+        
+        {/* Simple flex container */}
+        <Box sx={{ 
+          display: 'flex', 
+          flexWrap: 'wrap', 
+          gap: 4,
+          justifyContent: 'space-between'
+        }}>
           {projects.map((project, index) => (
-            <Grid item xs={12} md={6} key={index}>
+            // Project card with explicit width
+            <Box 
+              key={index}
+              sx={{ 
+                width: { xs: '100%', md: 'calc(50% - 16px)' }, 
+                mb: 4 
+              }}
+            >
               <Card 
+                variant="outlined" // Use outlined variant for minimalism
                 sx={{ 
-                  height: '100%',
-                  backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                  transition: 'transform 0.3s ease-in-out',
-                  '&:hover': {
-                    transform: 'translateY(-10px)',
-                  },
+                  height: '100%', // Make cards in a row equal height
                   display: 'flex',
                   flexDirection: 'column',
-                  borderRadius: 2,
-                  overflow: 'hidden',
+                  borderColor: 'rgba(255, 255, 255, 0.12)', // Subtle border color
+                  borderRadius: '8px', // Consistent with theme
+                  transition: 'transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out',
+                  backgroundColor: 'background.paper',
+                  '&:hover': {
+                    transform: 'translateY(-6px)',
+                    boxShadow: '0 8px 20px rgba(0, 0, 0, 0.2)', // Subtle shadow on hover
+                    borderColor: 'primary.main' // Highlight border on hover
+                  }
                 }}
               >
-                <CardActionArea>
-                  <CardMedia
-                    component="img"
-                    height="250"
-                    image={project.image}
-                    alt={project.title}
+                <CardMedia
+                  component="img"
+                  height="220" // Adjust height as needed
+                  image={project.image}
+                  alt={project.title}
+                  sx={{ 
+                    objectFit: 'cover', 
+                    borderBottom: '1px solid rgba(255, 255, 255, 0.12)' // Subtle separator
+                  }}
+                />
+                <CardContent sx={{ flexGrow: 1, p: 3 }}> {/* Added padding */} 
+                  <Typography 
+                    variant="h5" 
+                    component="h3" 
+                    gutterBottom
                     sx={{ 
-                      objectFit: 'cover',
-                      borderBottom: '3px solid #ff6f61'
+                      fontWeight: '600', 
+                      color: 'text.primary' // Use theme text color
                     }}
-                  />
-                  <CardContent sx={{ flexGrow: 1 }}>
-                    <Typography 
-                      variant="h5" 
-                      component="h3" 
-                      sx={{ 
-                        color: '#ff6f61',
-                        mb: 2,
-                        fontWeight: 'bold'
-                      }}
-                    >
-                      {project.title}
-                    </Typography>
-                    <Chip 
-                      label={project.category}
-                      sx={{ 
-                        mb: 2,
-                        backgroundColor: '#ff6f61',
-                        color: 'white'
-                      }}
-                    />
-                    <Typography 
-                      variant="body2" 
-                      sx={{ 
-                        mb: 2,
-                        color: 'rgba(255, 255, 255, 0.7)'
-                      }}
-                    >
-                      {project.description}
-                    </Typography>
-                    <Stack 
-                      direction="row" 
-                      spacing={1} 
-                      flexWrap="wrap" 
-                      gap={1}
-                    >
-                      {project.technologies.map((tech, index) => (
-                        <Chip
-                          key={index}
-                          label={tech}
-                          size="small"
-                          sx={{
-                            backgroundColor: 'rgba(255, 111, 97, 0.1)',
-                            color: '#ff6f61',
-                            borderRadius: '4px',
-                          }}
-                        />
-                      ))}
-                    </Stack>
-                  </CardContent>
-                </CardActionArea>
+                  >
+                    {project.title}
+                  </Typography>
+                  <Typography 
+                    variant="body2" 
+                    color="text.secondary" // Use theme secondary text color
+                    sx={{ mb: 2 }}
+                  >
+                    {project.description}
+                  </Typography>
+                  <Stack 
+                    direction="row" 
+                    spacing={1} 
+                    flexWrap="wrap" 
+                    gap={1} // Use gap for better spacing control
+                  >
+                    {project.technologies.map((tech, techIndex) => (
+                      <Chip
+                        key={techIndex}
+                        label={tech}
+                        size="small"
+                        variant="outlined" // Outlined chips for minimal look
+                        sx={{
+                          borderColor: 'primary.main',
+                          color: 'primary.main',
+                          fontSize: '0.75rem' // Slightly smaller font
+                        }}
+                      />
+                    ))}
+                  </Stack>
+                </CardContent>
+                {/* Optional: Add CardActions for links/buttons */}
+                {/* 
+                <CardActions sx={{ px: 3, pb: 2, justifyContent: 'flex-start' }}>
+                  {project.liveUrl && (
+                    <Button size="small" href={project.liveUrl} target="_blank" variant="contained">
+                      Live Demo
+                    </Button>
+                  )}
+                  {project.repoUrl && (
+                    <Button size="small" href={project.repoUrl} target="_blank" variant="outlined">
+                      GitHub
+                    </Button>
+                  )}
+                </CardActions>
+                */}
               </Card>
-            </Grid>
+            </Box>
           ))}
-        </Grid>
+        </Box>
       </Container>
     </Box>
   );

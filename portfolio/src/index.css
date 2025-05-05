@@ -115,3 +115,15 @@ section {
   background: #ff6f61;
   border-radius: 4px;
 }
+
+/* Keyframes for Footer Animation */
+@keyframes fadeInFooter {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Optional: subtle slide up */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
