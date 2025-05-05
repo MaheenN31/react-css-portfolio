@@ -1,4 +1,6 @@
-import { Box } from '@mui/material';
+import { useState, useEffect } from 'react';
+import { Box, useMediaQuery, IconButton } from '@mui/material';
+import MenuIcon from '@mui/icons-material/Menu';
 import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Home from './pages/Home';
@@ -12,6 +14,24 @@ import Footer from './components/Footer';
 const SIDEBAR_WIDTH = 250;
 
 function App() {
+  // State for mobile sidebar toggling
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  
+  // Detect if on mobile
+  const isMobile = useMediaQuery('(max-width:900px)');
+  
+  // Function to toggle mobile sidebar
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
+  };
+  
+  // Close sidebar when switching from mobile to desktop
+  useEffect(() => {
+    if (!isMobile) {
+      setIsMobileSidebarOpen(false);
+    }
+  }, [isMobile]);
+
   // Function for smooth scrolling
   const scrollToSection = (sectionId) => {
     const sectionElement = document.getElementById(sectionId);
@@ -31,24 +51,45 @@ function App() {
 
   return (
     <Box sx={{ display: 'flex' }}>
-      {/* Fixed Sidebar */}
+      {/* Sidebar - visible always on desktop, togglable on mobile */}
       <Sidebar 
-        scrollToSection={scrollToSection} 
+        scrollToSection={scrollToSection}
+        isMobile={isMobile}
+        isOpen={isMobileSidebarOpen}
+        toggleSidebar={toggleMobileSidebar}
       />
+      
+      {/* Mobile sidebar backdrop - only visible when sidebar is open on mobile */}
+      {isMobile && isMobileSidebarOpen && (
+        <Box
+          onClick={toggleMobileSidebar}
+          sx={{
+            position: 'fixed',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            bgcolor: 'rgba(0, 0, 0, 0.5)',
+            zIndex: 1199, // Below sidebar but above content
+          }}
+        />
+      )}
       
       {/* Main content area */}
       <Box 
         sx={{ 
           flexGrow: 1, 
-          ml: `${SIDEBAR_WIDTH}px`,  // Push content right to make room for sidebar
+          ml: isMobile ? 0 : `${SIDEBAR_WIDTH}px`,  // Only push content on desktop
           display: 'flex',
           flexDirection: 'column',
           minHeight: '100vh',
         }}
       >
-        {/* Navbar still at the top */}
+        {/* Navbar with mobile menu button */}
         <Navbar
           scrollToSection={scrollToSection}
+          isMobile={isMobile}
+          toggleSidebar={toggleMobileSidebar}
         />
         
         {/* Main content sections */}

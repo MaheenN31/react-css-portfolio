@@ -1,12 +1,17 @@
-import { Box, List, ListItem, ListItemText, Paper, useTheme } from '@mui/material';
+import { Box, List, ListItem, ListItemText, Paper, useTheme, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
-const Sidebar = ({ scrollToSection }) => {
+const Sidebar = ({ scrollToSection, isMobile, isOpen, toggleSidebar }) => {
   const theme = useTheme();
   const accentColor = theme.palette.primary.main;
   
   const handleNavigation = (sectionId) => {
     console.log('Sidebar: Scrolling to section', sectionId);
     scrollToSection(sectionId);
+    // Only close sidebar after navigation on mobile
+    if (isMobile) {
+      toggleSidebar();
+    }
   };
 
   const menuItems = [
@@ -24,7 +29,7 @@ const Sidebar = ({ scrollToSection }) => {
         width: '250px',
         height: '100vh',
         position: 'fixed',
-        left: 0,
+        left: isMobile ? (isOpen ? 0 : '-250px') : 0, // Hide off-screen when closed on mobile
         top: 0,
         bgcolor: 'rgba(30, 30, 35, 0.5)',
         backdropFilter: 'blur(15px)',
@@ -34,7 +39,8 @@ const Sidebar = ({ scrollToSection }) => {
         zIndex: 1200,
         display: 'flex',
         flexDirection: 'column',
-        boxShadow: '0 2px 10px rgba(0,0,0,0.2)'
+        boxShadow: '0 2px 10px rgba(0,0,0,0.2)',
+        transition: 'left 0.3s ease-in-out', // Smooth transition for mobile
       }}
     >
       <Box
@@ -50,7 +56,22 @@ const Sidebar = ({ scrollToSection }) => {
         }}
       />
       
-      <List sx={{ p: 3, pt: 4, flexGrow: 1, position: 'relative' }}>
+      {/* Close button - only visible on mobile */}
+      {isMobile && (
+        <Box sx={{ textAlign: 'right', p: 1 }}>
+          <IconButton 
+            onClick={toggleSidebar} 
+            sx={{ 
+              color: 'white',
+              '&:hover': { color: accentColor },
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </Box>
+      )}
+      
+      <List sx={{ p: 3, pt: isMobile ? 2 : 4, flexGrow: 1, position: 'relative' }}>
         {menuItems.map((item) => (
           <ListItem 
             button 
